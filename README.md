@@ -2,5 +2,5 @@
 Data Structure and algorithm 
 
 
-This repository Contain : 
+**This repository Contain :** 
 + Bubble Sort (see more Wiki)

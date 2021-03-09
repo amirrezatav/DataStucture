@@ -24,6 +24,7 @@ void bubbleSort_Ascending(T arr[], int n)
 			swap(&arr[j], &arr[j+1]); 
     }
 } 
+// A function to implement bubble sort (Descending)
 template<class T>
 void bubbleSort_Descending(T arr[], int n) 
 { 

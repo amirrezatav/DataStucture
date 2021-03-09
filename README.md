@@ -1,6 +1,5 @@
 # This repository Contain
-##  DataStucture
-Data Structure and algorithm 
+**Data Structure and algorithm** 
 
 
 **This repository Contain :** 

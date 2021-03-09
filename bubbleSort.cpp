@@ -50,15 +50,18 @@ void print(T arr[], int size)
 // Driver code 
 int main() 
 { 
+	
 	int arri[] = {64, 34, 25, 12, 22, 11, 90}; 
 	int arrisize = sizeof(arri)/sizeof(arri[0]); 
 	bubbleSort_Ascending(arri, arrisize); 
 	cout<<"Ascending Sorted int array: \n"; 
 	print(arri, arrisize); 
-    double arrd[] = {64.2, -34.88, 2.5, 7.12, 28.82, -1.91, 9.0}; 
+	
+  	double arrd[] = {64.2, -34.88, 2.5, 7.12, 28.82, -1.91, 9.0}; 
 	int arrdsize = sizeof(arrd)/sizeof(arrd[0]); 
 	bubbleSort_Descending<double>(arrd, arrdsize); 
 	cout<<"Descending Sorted double array: \n"; 
 	print<double>(arrd, arrdsize); 
+	
 	return 0; 
 } 

@@ -296,7 +296,7 @@ class SortClass
 		//PrintArray(array_Selectionsort, "Selectionsort Array");
 		//PrintArray(array_Shellsort,     "Shellsort Array    ");
 		//PrintArray(array_bubbleSort,    "bubbleSort Array   ");
-		//PrintArray(array_MergeSort,    "mergeSort Array   ");
+		//PrintArray(array_MergeSort,     "mergeSort Array    ");
 		//Console.WriteLine();
 		//Console.WriteLine();
 		//Console.WriteLine();
@@ -308,7 +308,7 @@ class SortClass
 		Console.WriteLine(">> Shell Sort Time Elapsed :     {0}", watch_Shellsort.Elapsed);
 		Console.WriteLine(">> Selection Sort Time Elapsed : {0}", watch_Selectionsort.Elapsed);
 		Console.WriteLine(">> Bubble Sort Time Elapsed :    {0}", watch_bubbleSort.Elapsed);
-		Console.WriteLine(">> Merge Sort Time Elapsed :   {0}", watch_MergeSort.Elapsed);
+		Console.WriteLine(">> Merge Sort Time Elapsed :     {0}", watch_MergeSort.Elapsed);
 
 		Console.ReadLine();
 	}

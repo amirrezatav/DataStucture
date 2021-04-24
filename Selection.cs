@@ -1,7 +1,7 @@
 //  Selection Sort
 using System;
 
-class GFG
+class Selection
 {
 	static void sort(int[] arr)
 	{

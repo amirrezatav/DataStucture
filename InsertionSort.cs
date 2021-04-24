@@ -1,61 +1,33 @@
-// C# program for implementation of Insertion Sort
-using System;
-enum Direction
-{
-	descending,
-	ascending
-}
-class InsertionSort
-{
+#include <iostream>
+using namespace std;
 
-	public static void Insertionsort(int[] arr , Direction dir )
+void insertionSort(int arr[], int n)
+{
+	int i, key, j;
+	for (i = 1; i < n; i++)
 	{
-		for (int i = 1; i < arr.Length; ++i)
+		key = arr[i];
+		j = i - 1;
+
+		while (j >= 0 && arr[j] > key)
 		{
-			int key = arr[i];
-			int j = i - 1;
-
-			if(dir == Direction.ascending)
-            {
-				while (j >= 0 && arr[j] > key)
-				{
-					arr[j + 1] = arr[j];
-					j = j - 1;
-				}
-			}
-            else
-            {
-				while (j >= 0 && arr[j] < key)
-				{
-					arr[j + 1] = arr[j];
-					j = j - 1;
-				}
-			}
-		
-			arr[j + 1] = key;
+			arr[j + 1] = arr[j];
+			j = j - 1;
 		}
+		arr[j + 1] = key;
 	}
+}
 
-	// Driver Code
-	public static void Main()
-	{
 
-		int[] a = new int[(int)Math.Pow(2, 6)];
-		Random rd = new Random();
+int main()
+{
+	int arr[] = { 12, 11, 13, 5, 6 };
+	int n = sizeof(arr) / sizeof(arr[0]);
 
-		for (int i = 0; i < a.Length; i++)
-			a[i] = rd.Next(1, 1000);
+	insertionSort(arr, n);
+	for (i = 0; i < n; i++)
+		cout << arr[i] << " ";
 
-		Console.Write("UnSorted array: \n");
-		for (int i = 0; i < a.Length; i++)
-			Console.Write(a[i] + " ");
-
-		Insertionsort(a , Direction.ascending);
-
-		Console.Write("\n Sorted array: \n");
-		for (int i = 0; i < a.Length; i++)
-			Console.Write(a[i] + " ");
-
-	}
+	return 0;
 }
 

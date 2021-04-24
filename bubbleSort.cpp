@@ -1,67 +1,93 @@
 //In the Name of God, the Merciful, the Compassionate
 //bubbleSort
 //telegram.me/amirrezatav
-#include <iostream> 
-using namespace std; 
-template<class T>
-void swap(T *xp, T *yp) 
-{ 
-	T temp = *xp; 
-	*xp = *yp; 
-	*yp = temp; 
-} 
+// C++ implementation of the approach
+#include <iostream>
+#include <vector>
+using namespace std;
 
-// A function to implement bubble sort (Ascending)
-template<class T>
-void bubbleSort_Ascending(T arr[], int n) 
-{ 
-	int i, j; 
-	for (i = 0; i < n-1; i++)	 
-	{
-	// Last i elements are already in place 
-	for (j = 0; j < n-i-1; j++) 
-		if (arr[j] > arr[j+1]) 
-			swap(&arr[j], &arr[j+1]); 
-    }
-} 
-// A function to implement bubble sort (Descending)
-template<class T>
-void bubbleSort_Descending(T arr[], int n) 
-{ 
-	int i, j; 
-	for (i = 0; i < n-1; i++)	 
-	{
-	// Last i elements are already in place 
-	for (j = 0; j < n-i-1; j++) 
-		if (arr[j] < arr[j+1]) 
-			swap<double>(&arr[j], &arr[j+1]); 
-    }
-} 
-/* Function to print an array */
-template<class T>
-void print(T arr[], int size) 
-{ 
-	int i; 
-	for (i = 0; i < size; i++) 
-		cout << arr[i] << " "; 
-	cout << endl; 
-} 
 
-// Driver code 
-int main() 
-{ 
+bool compare(string x, string y)
+{
+	char first;
+	char second;
+	for (size_t i = 0; i < min(x.length() , y.length()); i++)
+	{
+		first = tolower(x[i]);
+		second = tolower(y[i]);
+		if (first == second)
+			continue;
+		else if (first > second)
+			return true;
+		else
+			return false;
+	}
+}
+
+void stringbubble_sort(string  arr[], int length)
+{
+	bool flag = true;
+	for (size_t i = 0; i < length - 1 && flag; i++)
+	{
+		flag = false;
+		for (size_t j = 0; j < length - i - 1; j++)
+		{
+			if (compare(arr[j], arr[j + 1]))
+			{
+				swap(arr[j], arr[j + 1]);
+				flag = true;
+			}
+		}
+	}
+}
+template<class T>
+void Nonstringbubble_sort(T  arr[], int length)
+{
+	bool flag = true;
+	for (size_t i = 0; i < length - 1 && flag; i++)
+	{
+		flag = false;
+		for (size_t j = 0; j < length - i - 1; j++)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				swap(arr[j], arr[j + 1]);
+				flag = true;
+			}
+		}
+	}
+}
+
+template<class T>
+void bubble_sort(int Nonstring_arraylength = 0 , T Nonstringarray[] = NULL 
+	,  int string_arraylength = 0, string stringarray[] = NULL)
+{
 	
-	int arri[] = {64, 34, 25, 12, 22, 11, 90}; 
-	int arrisize = sizeof(arri)/sizeof(arri[0]); 
-	bubbleSort_Ascending(arri, arrisize); 
-	cout<<"Ascending Sorted int array: \n"; 
-	print(arri, arrisize); 
-	
-  	double arrd[] = {64.2, -34.88, 2.5, 7.12, 28.82, -1.91, 9.0}; 
-	int arrdsize = sizeof(arrd)/sizeof(arrd[0]); 
-	bubbleSort_Descending<double>(arrd, arrdsize); 
-	cout<<"Descending Sorted double array: \n"; 
-	print<double>(arrd, arrdsize); 
-	
-	return 0; 
-} 
+	bool flag = true;
+	if (stringarray != NULL)
+	{
+		stringbubble_sort(stringarray, string_arraylength);
+	}
+	else if (Nonstringarray != NULL)
+	{
+		Nonstringbubble_sort<T>(Nonstringarray, Nonstring_arraylength);
+	}
+
+}
+
+// Driver code
+int main()
+{
+	string v[] = { "Amirreza", "Ali", "Hasan",
+					"Erfan", "Fatemeh", "Zahra", "Zeynab" };
+	int a[] = { 9,8,7,6,5,4,3,2,1 };
+	bubble_sort<int>(sizeof(a) / sizeof(int), a , 7 , v);
+
+	// Print the strings after sorting
+	for (auto x : v)
+		cout << x << " ";
+	cout << endl;
+	for (auto x : a)
+		cout << x << " ";
+	return 0;
+}

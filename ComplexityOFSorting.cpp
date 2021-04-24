@@ -2,7 +2,6 @@
 #include <math.h>
 #include <chrono>
 #include <unistd.h>
-#include <ctime>
 
 using namespace std;
 

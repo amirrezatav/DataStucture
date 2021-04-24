@@ -6,6 +6,61 @@ enum Direction
 }
 class SortClass
 {
+	static void merge(int[] arr, int low, int mid, int up, Direction dir)
+	{
+
+		int lenL = mid - low + 1;
+		int lenR = up - mid;
+
+		int[] L = new int[lenL];
+		int[] R = new int[lenR];
+
+		int i = 0;
+		int j = 0;
+		int k = low;
+
+		Array.Copy(arr , low , L , 0 , lenL);
+		Array.Copy(arr , mid + 1 ,  R , 0 , lenR);
+
+		if(dir == Direction.ascending)
+        {
+			while (i < lenL && j < lenR)
+			{
+				if (L[i] <= R[j])
+					arr[k++] = L[i++];
+				else
+					arr[k++] = R[j++];
+			}
+		}
+        else
+        {
+			while (i < lenL && j < lenR)
+			{
+				if (L[i] > R[j])
+					arr[k++] = L[i++];
+				else
+					arr[k++] = R[j++];
+			}
+		}
+
+		while (i < lenL)
+			arr[k++] = L[i++];
+
+		while (j < lenR)
+			arr[k++] = R[j++];
+	}
+	static void sort(int[] arr, int low, int up , Direction dir)
+	{
+		if (low < up)
+		{
+			int mid = (low + up) / 2;
+
+			sort(arr, low, mid , dir);
+			sort(arr, mid + 1, up , dir);
+
+			merge(arr, low, mid, up , dir);
+		}
+	}
 	static void Swap<T>(ref T lhs, ref T rhs)
 	{
 		T temp;
@@ -167,6 +222,7 @@ class SortClass
 			}
 		}
 	}
+
 	public static void PrintArray(int[] arr , string Title)
     {
 		Console.Write(Title + " : ");
@@ -184,6 +240,7 @@ class SortClass
 		var watch_Selectionsort = new System.Diagnostics.Stopwatch();
 		var watch_Shellsort = new System.Diagnostics.Stopwatch();
 		var watch_bubbleSort = new System.Diagnostics.Stopwatch();
+		var watch_MergeSort = new System.Diagnostics.Stopwatch();
 
 		int arrayLen = (int)Math.Pow(2, 16);
 		int[] array = new int[arrayLen];
@@ -199,12 +256,14 @@ class SortClass
 		var array_Selectionsort = new int[arrayLen];
 		var array_Shellsort = new int[arrayLen];
 		var array_bubbleSort = new int[arrayLen];
+		var array_MergeSort = new int[arrayLen];
 
 		Array.Copy(array, array_bitonicSort, arrayLen);
 		Array.Copy(array, array_Insertionsort, arrayLen);
 		Array.Copy(array, array_Selectionsort, arrayLen);
 		Array.Copy(array, array_Shellsort, arrayLen);
 		Array.Copy(array, array_bubbleSort, arrayLen);
+		Array.Copy(array, array_MergeSort, arrayLen);
 
 
 		watch_bitonicSort.Start();
@@ -226,12 +285,18 @@ class SortClass
 		watch_bubbleSort.Start();
 		bubbleSort(array_bubbleSort, Direction.ascending);
 		watch_bubbleSort.Stop();
+
+		watch_MergeSort.Start();
+		sort(array_MergeSort, 0, arrayLen-1, Direction.ascending);
+		watch_MergeSort.Stop();
+
 		//PrintArray(array,               "UnSorted Array     ");
 		//PrintArray(array_bitonicSort,   "bitonicSort Array  ");
 		//PrintArray(array_Insertionsort, "Insertionsort Array");
 		//PrintArray(array_Selectionsort, "Selectionsort Array");
 		//PrintArray(array_Shellsort,     "Shellsort Array    ");
 		//PrintArray(array_bubbleSort,    "bubbleSort Array   ");
+		//PrintArray(array_MergeSort,    "mergeSort Array   ");
 		//Console.WriteLine();
 		//Console.WriteLine();
 		//Console.WriteLine();
@@ -243,6 +308,7 @@ class SortClass
 		Console.WriteLine(">> Shell Sort Time Elapsed :     {0}", watch_Shellsort.Elapsed);
 		Console.WriteLine(">> Selection Sort Time Elapsed : {0}", watch_Selectionsort.Elapsed);
 		Console.WriteLine(">> Bubble Sort Time Elapsed :    {0}", watch_bubbleSort.Elapsed);
+		Console.WriteLine(">> Merge Sort Time Elapsed :   {0}", watch_MergeSort.Elapsed);
 
 		Console.ReadLine();
 	}

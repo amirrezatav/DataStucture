@@ -13,4 +13,6 @@ bool compare(string x, string y)
 		else
 			return false;
 	}
+	return true;
+
 }

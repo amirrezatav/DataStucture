@@ -5,13 +5,16 @@ using namespace std;
 void merge(int arr[], int low, int mid, int up)
 {
 	int lenL = mid - low + 1;
-	int lenR = up - mid;
+	int lenR = up - mid ;
 
-	int L[lenL], R[n2];
+	int *L, *R;
+    
+    L = new int[lenL];
+    R = new int[lenR];
 
 	for (int i = 0; i < lenL; i++)
 		L[i] = arr[low + i];
-	for (int j = 0; j < n2; j++)
+	for (int j = 0; j < lenR; j++)
 		R[j] = arr[mid + 1 + j];
 
 
@@ -21,7 +24,7 @@ void merge(int arr[], int low, int mid, int up)
 
 	int k = low;
 
-	while (i < lenL && j < n2) {
+	while (i < lenL && j < lenR) {
 		if (L[i] <= R[j]) {
 			arr[k] = L[i];
 			i++;
@@ -39,7 +42,7 @@ void merge(int arr[], int low, int mid, int up)
 		k++;
 	}
 
-	while (j < n2) {
+	while (j < lenR) {
 		arr[k] = R[j];
 		j++;
 		k++;

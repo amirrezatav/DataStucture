@@ -12,7 +12,7 @@
     - Calculate(cal Function)
 # Compare String
 #### CPP CODE
-
+```cpp
     bool compare(string x, string y)
     {
     	char first;
@@ -31,4 +31,24 @@
     	return true;
 
     }
-#### [C# CODE](https://github.com/amirrezatav/DataStucture/blob/main/compareString.cs)
+```
+
+#### C# Code
+```csharp
+bool compare(string x, string y)
+    {
+		int min(int a, int b) => ((a > b) ? b : a);
+		x = x.ToLower();
+		y = y.ToLower();
+		for (int i = 0; i < min(x.Length, y.Length); i++)
+		{
+			if (x[i] == y[i])
+				continue;
+			else if (x[i] > y[i])
+				return true;
+			else
+				return false;
+		}
+		return true;
+	}
+```

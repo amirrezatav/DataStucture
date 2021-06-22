@@ -11,7 +11,7 @@ public:
     { 
         top = -1;
     }
-    bool push(int x)
+    bool push(T x)
     {
         if (isfull()) {
             throw ( "Stack Overflow");

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include<stack>
 using namespace std;
 struct BSTNode
 {
@@ -26,6 +27,7 @@ class BST
 	BSTNode* successor(BSTNode*);
 public:
 	BST();
+	~BST();
 	void Insert(int value);
 	BSTNode* Search(int value);
 	void Inorder(string& result);
@@ -35,6 +37,10 @@ public:
 	int predecessor(int value);
 	void Delete(int value);
 };
+BST::~BST()
+{
+	delete root;
+}
 void BST::Delete(int value)
 {
 	Delete(Search(value));

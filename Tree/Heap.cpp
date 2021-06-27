@@ -19,8 +19,23 @@ public:
     int Delete(int index);
     void DecreaseKey(int i, int newvalue);
     int GetMin();
+    static MinHeap* Merge(MinHeap* heap1, MinHeap* heap2);
 
 };
+MinHeap* MinHeap::Merge(MinHeap* heap1 , MinHeap* heap2)
+{
+    MinHeap* resheap = new MinHeap(heap1->arraysize + heap2->arraysize);
+    for (int i = 0; i < heap1->heapsize; i++)
+        resheap->heap[i] = heap1->heap[i];
+    for (int i = 0; i < heap2->heapsize; i++)
+        resheap->heap[heap1->heapsize +i] = heap2->heap[i];
+    resheap->heapsize = heap1->heapsize + heap2->heapsize;
+   
+    for (int i = (resheap->heapsize)/2 ; i >= 0; i--)
+        resheap->MinHeapify(i);
+
+    return resheap;
+}
 int MinHeap::GetMin()
 {
     return heap[0];
@@ -58,6 +73,7 @@ int MinHeap::Delete(int index)
 MinHeap::MinHeap(int arraysize) : arraysize(arraysize), heapsize(0)
 {
     heap = new int[arraysize];
+    memset(heap, 0, arraysize);
 }
 MinHeap::~MinHeap()
 {
@@ -69,11 +85,11 @@ int MinHeap::Parent(int index)
 }
 int MinHeap::LeftChild(int index)
 {
-    return 2 * index + 1 < arraysize ? 2 * index + 1 : -1;
+    return 2 * index + 1 < heapsize ? 2 * index + 1 : -1;
 }
 int MinHeap::RightChild(int index)
 {
-    return 2 * index + 2 < arraysize ? 2 * index + 2 : -1;
+    return 2 * index + 2 < heapsize ? 2 * index + 2 : -1;
 }
 void MinHeap::Insert(int key)
 {
@@ -97,17 +113,19 @@ void MinHeap::MinHeapify(int index)
     if (heapsize <= 0) throw exception();
     if (heapsize > 1)
     {
-        if (RightChild(index) != -1 && heap[index] > RightChild(index))
+
+        int l = LeftChild(index);
+        int r = RightChild(index);
+        int smallest = index;
+        if (l != -1 && heap[l] < heap[index])
+            smallest = l;
+        if (r != -1 && heap[r] < heap[smallest])
+            smallest = r;
+        if (smallest != index)
         {
-            swap(heap[index], heap[RightChild(index)]);
-            MinHeapify(RightChild(index));
+            swap(heap[index], heap[smallest]);
+            MinHeapify(smallest);
         }
-        else if (LeftChild(index) != -1 && index > LeftChild(index))
-        {
-            swap(heap[index], heap[LeftChild(index)]);
-            MinHeapify(LeftChild(index));
-        }
-        else return;
     }
 }
 
@@ -129,17 +147,26 @@ int MinHeap::ExtractMin()
 }
 int main()
 {
-    MinHeap heap(11);
-    heap.Insert(3);
-    heap.Insert(2);
-    heap.Insert(1);
-    heap.Insert(15);
-    heap.Insert(5);
-    heap.Insert(4);
-    heap.Insert(45);
-    cout << heap.ExtractMin() << " ";
-    cout << heap.ExtractMin() << " ";
-    heap.DecreaseKey(3, -2);
-    cout << heap.GetMin();
+    MinHeap heap1(10);
+    heap1.Insert(3);
+    heap1.Insert(2);
+    heap1.Insert(1);
+    heap1.Insert(15);
+    heap1.Insert(5);
+    heap1.Insert(4);
+    heap1.Insert(45);
+    cout << heap1.ExtractMin() << " ";
+    cout << heap1.ExtractMin() << " ";
+    heap1.DecreaseKey(3, -2);
+    cout << heap1.GetMin() << " ";
+
+    MinHeap heap2(5);
+    heap2.Insert(1);
+    heap2.Insert(5);
+    heap2.Insert(-10);
+    heap2.Insert(2);
+    MinHeap heapMerge = *MinHeap::Merge(&heap1,&heap2);
+    cout << heapMerge.ExtractMin() << " ";
+    cout << heapMerge.ExtractMin() << " ";
     return 0;
 }
